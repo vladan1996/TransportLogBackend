@@ -28,6 +28,10 @@ namespace WebAuth.Controllers
         [Route("insertCustomer")]
         public IActionResult insertCustomer([FromBody]Customers customers)
         {
+            //if(customers == null) {
+            //    return Ok("Some feild's are empty!");
+            //}
+
             Customers obj = new Customers()
             {
                 Id = Guid.NewGuid(),
@@ -49,7 +53,7 @@ namespace WebAuth.Controllers
 
         // PUT api/<CustomersController>/5
 
-        [HttpPost]
+        [HttpPut]
         [Route("updateCustomer")]
         public IActionResult upadateCustomer([FromBody]Customers customers)
         {
@@ -77,6 +81,10 @@ namespace WebAuth.Controllers
         public IActionResult deleteCustomer(Guid Id)
         {
             var customer = dbContext.Customers.FirstOrDefault(x => x.Id == Id);
+
+            if(customer == null) {
+                return Ok("Customer not found in Database!");
+            }
 
             dbContext.Customers.Remove(customer);
             dbContext.SaveChanges();
