@@ -17,6 +17,8 @@ namespace WebAuth.DBContext
         public DbSet<Job> Job { get; set; }
         public DbSet<SupportStatuses> SupportStatuses { get; set; }
         public DbSet<Dock> Docks { get; set; }
+        public DbSet<UserManagement> UserManagement { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
