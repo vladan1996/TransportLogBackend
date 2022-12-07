@@ -12,7 +12,7 @@ using WebAuth.DBContext;
 namespace WebAuth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221205122351_EditJob")]
+    [Migration("20221207143505_EditJob")]
     partial class EditJob
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,7 +280,7 @@ namespace WebAuth.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomersId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DockId")
@@ -297,7 +297,7 @@ namespace WebAuth.Migrations
                     b.Property<int>("NoPallets")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SupportStatusId")
+                    b.Property<Guid>("SuportStatusId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("endDate")
@@ -308,11 +308,11 @@ namespace WebAuth.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomersId");
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("DockId");
 
-                    b.HasIndex("SupportStatusId");
+                    b.HasIndex("SuportStatusId");
 
                     b.ToTable("Job");
                 });
@@ -456,7 +456,7 @@ namespace WebAuth.Migrations
                 {
                     b.HasOne("WebAuth.Models.Customers", "Customers")
                         .WithMany()
-                        .HasForeignKey("CustomersId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -466,9 +466,9 @@ namespace WebAuth.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAuth.Models.SupportStatuses", "SupportStatus")
+                    b.HasOne("WebAuth.Models.SupportStatuses", "SupportStatuses")
                         .WithMany()
-                        .HasForeignKey("SupportStatusId")
+                        .HasForeignKey("SuportStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -476,7 +476,7 @@ namespace WebAuth.Migrations
 
                     b.Navigation("Dock");
 
-                    b.Navigation("SupportStatus");
+                    b.Navigation("SupportStatuses");
                 });
 #pragma warning restore 612, 618
         }

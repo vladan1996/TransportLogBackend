@@ -37,28 +37,24 @@ namespace WebAuth.Controllers
 
         [HttpPost]
         [Route("insertJob")]
-        public IActionResult insertJob(Job Job)
+        public IActionResult insertJob([FromBody] Job job)
         {
-            //if(customers == null) {
-            //    return Ok("Some feild's are empty!");
-            //}
-
             Job obj = new Job()
             {
-                Id = Job.Id,
-                SupportStatus = Job.SupportStatus,
-                Customers = Job.Customers,
-                Dock = Job.Dock,
-                NoPallets = Job.NoPallets,
-                LoadNo = Job.LoadNo,
-                startDate = Job.startDate,
-                endDate = Job.endDate
-
+                Id = Guid.NewGuid(),
+                CustomerId = job.CustomerId,
+                SuportStatusId = job.SuportStatusId,
+                DockId = job.DockId,
+                NoPallets = job.NoPallets,
+                LoadNo = job.LoadNo,
+                LoadType = job.LoadType,
+                startDate = job.startDate,
+                endDate = job.endDate
             };
             dbContext.Job.Add(obj);
             dbContext.SaveChanges();
 
-            return Ok("Docks Added!");
+            return Ok("Job Added!");
         }
 
         [HttpPut]
@@ -70,9 +66,9 @@ namespace WebAuth.Controllers
             Job obj = new Job()
             {
                 Id = job.Id,
-                SupportStatus = job.SupportStatus,
-                Customers = job.Customers,
-                Dock = job.Dock,
+               // SuportStatusId = job.SuportStatusId,
+                //Customers = job.Customers,
+                //Dock = job.Dock,
                 NoPallets = job.NoPallets,
                 LoadNo = job.LoadNo,
                 startDate = job.startDate,

@@ -7,5 +7,6 @@ namespace WebAuth.Models
         [Key]
         public Guid Id { get; set; }
         public string DockName { get; set; }
+
     }
 }
