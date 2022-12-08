@@ -12,8 +12,8 @@ using WebAuth.DBContext;
 namespace WebAuth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221130144817_AddDB")]
-    partial class AddDB
+    [Migration("20221208134830_EditJob")]
+    partial class EditJob
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -280,22 +280,13 @@ namespace WebAuth.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ArrivalTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CustomerID")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomersId")
+                    b.Property<Guid>("DockId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DockID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DockOff")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DockOn")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoadNo")
@@ -309,19 +300,19 @@ namespace WebAuth.Migrations
                     b.Property<int>("NoPallets")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("StatusID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<Guid>("SupportStatusId")
+                    b.Property<Guid>("SupportStatusesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomersId");
+                    b.HasIndex("CustomerId");
 
-                    b.HasIndex("DockID");
+                    b.HasIndex("DockId");
 
-                    b.HasIndex("SupportStatusId");
+                    b.HasIndex("SupportStatusesId");
 
                     b.ToTable("Job");
                 });
@@ -465,19 +456,19 @@ namespace WebAuth.Migrations
                 {
                     b.HasOne("WebAuth.Models.Customers", "Customers")
                         .WithMany()
-                        .HasForeignKey("CustomersId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebAuth.Models.Dock", "Dock")
                         .WithMany()
-                        .HasForeignKey("DockID")
+                        .HasForeignKey("DockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAuth.Models.SupportStatuses", "SupportStatus")
+                    b.HasOne("WebAuth.Models.SupportStatuses", "SupportStatuses")
                         .WithMany()
-                        .HasForeignKey("SupportStatusId")
+                        .HasForeignKey("SupportStatusesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -485,7 +476,7 @@ namespace WebAuth.Migrations
 
                     b.Navigation("Dock");
 
-                    b.Navigation("SupportStatus");
+                    b.Navigation("SupportStatuses");
                 });
 #pragma warning restore 612, 618
         }

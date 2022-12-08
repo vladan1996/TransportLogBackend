@@ -46,6 +46,7 @@ namespace WebAuth.Controllers
         {
             var supportStatuse = dbContext.SupportStatuses.FirstOrDefault(x => x.Id == supportStatuses.Id);
 
+
             supportStatuse.Name = supportStatuses.Name;
             supportStatuse.Description = supportStatuses.Description;
 
@@ -59,6 +60,7 @@ namespace WebAuth.Controllers
         public IActionResult deleteSupportStatuses(Guid Id)
         {
             var supportStatuse = dbContext.SupportStatuses.FirstOrDefault(x => x.Id == Id);
+
             if (supportStatuse == null)
             {
                 return Ok("UserManagement not found in Database!");

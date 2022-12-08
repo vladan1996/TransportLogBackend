@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAuth.Migrations
 {
-    public partial class AddDB : Migration
+    public partial class addDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -236,35 +236,32 @@ namespace WebAuth.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoadNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupportStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StatusID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DockID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NoPallets = table.Column<int>(type: "int", nullable: false),
                     LoadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArrivalTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DockOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DockOff = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SupportStatusesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DockId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Job", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Job_Customers_CustomersId",
-                        column: x => x.CustomersId,
+                        name: "FK_Job_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Job_Docks_DockID",
-                        column: x => x.DockID,
+                        name: "FK_Job_Docks_DockId",
+                        column: x => x.DockId,
                         principalTable: "Docks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Job_SupportStatuses_SupportStatusId",
-                        column: x => x.SupportStatusId,
+                        name: "FK_Job_SupportStatuses_SupportStatusesId",
+                        column: x => x.SupportStatusesId,
                         principalTable: "SupportStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -310,19 +307,19 @@ namespace WebAuth.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_CustomersId",
+                name: "IX_Job_CustomerId",
                 table: "Job",
-                column: "CustomersId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_DockID",
+                name: "IX_Job_DockId",
                 table: "Job",
-                column: "DockID");
+                column: "DockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_SupportStatusId",
+                name: "IX_Job_SupportStatusesId",
                 table: "Job",
-                column: "SupportStatusId");
+                column: "SupportStatusesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

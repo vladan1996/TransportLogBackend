@@ -51,6 +51,7 @@ namespace WebAuth.Controllers
         {
             var dock = dbContext.Docks.FirstOrDefault(x => x.Id == docks.Id);
 
+
             dock.DockName = docks.DockName;
             
             dbContext.SaveChanges();
@@ -62,6 +63,7 @@ namespace WebAuth.Controllers
         public IActionResult deleteDocks(Guid Id)
         {
             var dock = dbContext.Docks.FirstOrDefault(x => x.Id == Id);
+
 
             if (dock == null)
             {

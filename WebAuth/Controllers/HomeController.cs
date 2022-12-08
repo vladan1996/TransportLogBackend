@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAuth.DBContext;
 using WebAuth.Models;
+using WebAuth.Models.DTO;
 
 
 namespace WebAuth.Controllers
@@ -37,19 +38,19 @@ namespace WebAuth.Controllers
 
         [HttpPost]
         [Route("insertJob")]
-        public IActionResult insertJob([FromBody] Job job)
+        public IActionResult insertJob([FromBody] JobDTO job)
         {
             Job obj = new Job()
             {
                 Id = Guid.NewGuid(),
                 CustomerId = job.CustomerId,
-                SuportStatusId = job.SuportStatusId,
+                SupportStatusesId = job.SupportStatusesId,
                 DockId = job.DockId,
                 NoPallets = job.NoPallets,
                 LoadNo = job.LoadNo,
                 LoadType = job.LoadType,
-                startDate = job.startDate,
-                endDate = job.endDate
+                StartDate = job.StartDate,
+                EndDate = job.EndDate
             };
             dbContext.Job.Add(obj);
             dbContext.SaveChanges();
@@ -71,8 +72,8 @@ namespace WebAuth.Controllers
                 //Dock = job.Dock,
                 NoPallets = job.NoPallets,
                 LoadNo = job.LoadNo,
-                startDate = job.startDate,
-                endDate = job.endDate
+                StartDate = job.StartDate,
+                EndDate = job.EndDate
 
             };
 

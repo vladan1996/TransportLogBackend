@@ -284,6 +284,9 @@ namespace WebAuth.Migrations
                     b.Property<Guid>("DockId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("LoadNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -295,14 +298,11 @@ namespace WebAuth.Migrations
                     b.Property<int>("NoPallets")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SuportStatusId")
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("SupportStatusesId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -310,7 +310,7 @@ namespace WebAuth.Migrations
 
                     b.HasIndex("DockId");
 
-                    b.HasIndex("SuportStatusId");
+                    b.HasIndex("SupportStatusesId");
 
                     b.ToTable("Job");
                 });
@@ -466,7 +466,7 @@ namespace WebAuth.Migrations
 
                     b.HasOne("WebAuth.Models.SupportStatuses", "SupportStatuses")
                         .WithMany()
-                        .HasForeignKey("SuportStatusId")
+                        .HasForeignKey("SupportStatusesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -59,6 +59,7 @@ namespace WebAuth.Controllers
         {
             var customer = dbContext.Customers.FirstOrDefault(x => x.Id == customers.Id);
 
+
             customer.FirstName = customers.FirstName;
             customer.LastName = customers.LastName;
             customer.Address = customers.Address;
@@ -82,7 +83,8 @@ namespace WebAuth.Controllers
         {
             var customer = dbContext.Customers.FirstOrDefault(x => x.Id == Id);
 
-            if(customer == null) {
+
+            if (customer == null) {
                 return Ok("Customer not found in Database!");
             }
 
