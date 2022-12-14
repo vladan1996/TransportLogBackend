@@ -24,16 +24,51 @@ namespace WebAuth.Controllers
             var docks = dbContext.Docks.ToList();
             var customers = dbContext.Customers.ToList();
             var statuses = dbContext.SupportStatuses.ToList();
+            var jobs = dbContext.Job.ToList();
+
+
 
             dynamic allData = new {
                 docks= docks,
                 customers=customers,
-                statuses=statuses
+                statuses=statuses,
+                jobs= jobs
+               
             };
            // data.dock = docks;
 
             return Ok(allData);
         }
+
+        //[HttpGet]
+        //[Route("getJob")]
+        //public IActionResult getJob()
+        //{
+        //    var jobs = dbContext.Job.ToList();
+
+
+        //    dynamic allData = new
+        //    {
+        //       jobs = jobs
+
+        //    };
+        //    // data.dock = docks;
+
+        //    return Ok(allData);
+        //}
+
+
+        [HttpGet]
+        [Route("getJobData")]
+        public IActionResult getJobData()
+        {
+            var jobs = dbContext.Job.ToList();
+          
+            // data.dock = docks;
+
+            return Ok(jobs);
+        }
+
 
 
         [HttpPost]
@@ -50,7 +85,10 @@ namespace WebAuth.Controllers
                 LoadNo = job.LoadNo,
                 LoadType = job.LoadType,
                 StartDate = job.StartDate,
-                EndDate = job.EndDate
+                EndDate = job.EndDate,
+                Subject = job.Subject
+
+
             };
             dbContext.Job.Add(obj);
             dbContext.SaveChanges();
@@ -60,25 +98,20 @@ namespace WebAuth.Controllers
 
         [HttpPut]
         [Route("updateJob")]
-        public IActionResult UpdateJob([FromBody] Job job)
+        public IActionResult UpdateJob([FromBody] JobDTO job)
         {
             var jobs = dbContext.Job.FirstOrDefault(x => x.Id == job.Id);
 
-            Job obj = new Job()
-            {
-                Id = job.Id,
-               // SuportStatusId = job.SuportStatusId,
-                //Customers = job.Customers,
-                //Dock = job.Dock,
-                NoPallets = job.NoPallets,
-                LoadNo = job.LoadNo,
-                StartDate = job.StartDate,
-                EndDate = job.EndDate
 
-            };
-
-            // dock.DockName = docks.DockName;
-            dbContext.Update(obj);
+            jobs.CustomerId = job.CustomerId;
+            jobs.SupportStatusesId = job.SupportStatusesId;
+            jobs.DockId = job.DockId;
+            jobs.NoPallets = job.NoPallets;
+            jobs.LoadNo = job.LoadNo;
+            jobs.LoadType = job.LoadType;
+            jobs.StartDate = job.StartDate;
+            jobs.EndDate = job.EndDate;
+            jobs.Subject = job.Subject;
 
             dbContext.SaveChanges();
             return Ok("Jobs updated sucessfull!");

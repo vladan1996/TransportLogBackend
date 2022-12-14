@@ -9,6 +9,7 @@ namespace WebAuth.Models
         public string LoadNo { get; set; }
         public int NoPallets { get; set; }
         public string LoadType { get; set; }
+        public string Subject { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
